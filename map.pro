@@ -12,12 +12,14 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mymap.cpp \
+    myset.cpp \
     rbt.cpp \
     shared.cpp
 
 HEADERS += \
     mainwindow.h \
     mymap.h \
+    myset.h \
     rbt.h \
     shared.h
 

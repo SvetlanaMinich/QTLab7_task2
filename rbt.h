@@ -24,6 +24,7 @@ template<class T, class T1>
 class rbt
 {
 protected:
+    int size;
     struct Node;
     shared<Node> root;
     shared<Node> grandparent(shared<Node> node);
@@ -46,12 +47,15 @@ protected:
     shared<Node> min(shared<Node> node);
     shared<Node> max(shared<Node> node);
 public:
-    rbt():root(nullptr){}
+    rbt():root(nullptr),size(0){}
     ~rbt();
     void add(T key, T1 value);
     void remove(T key);
     T1& operator[](T key);
     void clear();
+    void deleteSubtree(shared<Node> node);
+    bool empty() const;
+    std::size_t getSize() const;
 };
 
 #endif // RBT_H

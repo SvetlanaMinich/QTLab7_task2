@@ -79,6 +79,7 @@ void rbt<T, T1>::RotateRight(shared<Node> node) {
 //вставляем красный узел, а после проверяем все возможные случаи
 template<class T, class T1>
 void rbt<T, T1>::add(T key, T1 value) {
+    size++;
     shared<Node> tmp = root, p = shared<Node>();
     // Спускаемся по дереву, ища, куда вставить новый узел
     while (tmp) {
@@ -163,6 +164,7 @@ void rbt<T, T1>::InsCase5(shared<Node> node) {
 }
 template<class T, class T1>
 void rbt<T, T1>::remove(T key) {
+    size--;
     shared<Node> tmp = root ? find(root, key) : shared<Node>(); // Ищем узел с нужным ключем
     // Повезло повезло, ниче делать не надо если такого узла нет
     if (!tmp) {
@@ -316,4 +318,30 @@ void rbt<T, T1>::DelCase6(shared<Node> node) {
         }
         RotateRight(p);
     }
+}
+template<class T, class T1>
+void rbt<T, T1>::deleteSubtree(shared<Node> node) //удаление поддерева с корнем node
+{
+    if(node != nullptr)
+    {
+        deleteSubtree(node->left);
+        deleteSubtree(node->right);
+        delete node;
+        size--;
+    }
+}
+template<class T, class T1>
+bool rbt<T, T1>::empty() const
+{
+    return size == 0;
+}
+template<class T, class T1>
+std::size_t rbt<T, T1>::getSize() const
+{
+    return size;
+}
+template<class T, class T1>
+rbt<T,T1>::~rbt<T, T1>()
+{
+    clear();
 }

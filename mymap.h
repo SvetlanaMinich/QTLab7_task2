@@ -5,20 +5,13 @@
 template <typename KeyType, typename ValueType>
 class mymap : public rbt<KeyType,ValueType>
 {
-private:
-    std::size_t size;
-    shared<Node<KeyType,ValueType>> findNode(const KeyType& key);
-    void balanceAfterInsert(shared<Node<KeyType,ValueType>> node);
-    void balanceAfterErase(shared<Node<KeyType,ValueType>> node);
-    void rotateLeft(shared<Node<KeyType,ValueType>> node);
-    void rotateRight(shared<Node<KeyType,ValueType>> node);
-    void deleteSubtree(shared<Node<KeyType,ValueType>> node);
 public:
     class Iterator
     {
     private:
         shared<Node<KeyType,ValueType>> node;
     public:
+        Iterator() : node(nullptr){}
         Iterator(shared<Node<KeyType,ValueType>> node) : node(node){}
         std::pair< KeyType, ValueType>& operator*() const
         {
@@ -58,11 +51,6 @@ public:
             return node != other.node;
         }
     };
-    Iterator find(const KeyType& key)
-    {
-        shared<Node<KeyType,ValueType>> node = findNode(key);
-        return Iterator(node);
-    }
     Iterator begin()
     {
         shared<Node<KeyType,ValueType>> leftmost = this->root;
@@ -76,17 +64,8 @@ public:
     {
         return Iterator(nullptr);
     }
-    mymap() : size(0) {}
-    ~mymap()
-    {
-        clear();
-    }
-    void insert(const std::pair<const KeyType, ValueType>& data);
-    void erase(const KeyType& key);
-    ValueType& operator[](const KeyType& key);
-    void clear();
-    bool empty() const;
-    std::size_t getSize() const;
+    mymap();
+    ~mymap();
 };
 
 #endif // MYMAP_H
