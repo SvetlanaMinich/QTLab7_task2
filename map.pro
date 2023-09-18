@@ -10,18 +10,11 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    mymap.cpp \
-    myset.cpp \
-    rbt.cpp \
-    shared.cpp
+    mainwindow.cpp
 
 HEADERS += \
     mainwindow.h \
-    mymap.h \
-    myset.h \
-    rbt.h \
-    shared.h
+    rbt.h
 
 FORMS += \
     mainwindow.ui
